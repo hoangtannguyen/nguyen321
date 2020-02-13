@@ -6,75 +6,86 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <?php 
-        class Fan{
-            const SLOW = 1;
-            const MEDIUM = 2;
-            const FAST = 3;
-            private int $speed = self::SLOW;
-            private $on = false;
-            private float $radius = 5;
-            private string $color = "blue";
-         public function getSpeed(){
-             return $this->speed;
-         }
-         public function getOn(){
-            return $this->on;
-        }
-        public function getRadius(){
-            return $this->radius;
-        }
-        public function getColor(){
-            return $this->color;
+    <?php
+    class Circle{
+    protected $radius;
+    protected $color;
+
+        
+        
+      public function getRadius(){
+          return $this->radius;
+      }
+      public function getColor(){
+          return $this->color;
+      }
+
+      public function getArea(){
+          $area = $this->getRadius();
+
+          return $area * pi();
+      }
+
+      public function setColor($color){
+          $this->color = $color;
+    }
+      public function setRadius($radius){
+        $this->radius = $radius;
+    }
+        public function toString()
+        {
+            return  "Bán kính : " . $this->radius . " </br> Màu :"  . $this->color ."</br> Diện tích :" . $this->getArea();
+
         }
 
-        public function setMEDIUM(){
-                $this->speed = self::MEDIUM;
-                return $this;
-        }
-        public function setFAST(){
-            $this->speed = self::FAST;
-            return $this;
-    }
-    public function setSLOW(){
-        $this->speed = self::SLOW;
-        return $this;
-}
 
-public function setOn($cbolean){
-   $this->on = $cbolean;
-   return $this;
-}
-public function setRadius($radius){
-   $this->radius = $radius;
-   return $this;
-}
-public function setColor($color){
-   $this->color = $color;
-   return $this;
-}
-public function toString(){
-    if($this->on){
-        return  "</br> Tốc độ : " . $this->speed ."</br> Màu : " . $this->color . "</br> Bán kính : " . $this->radius . " :fan is on";
-    }else{
-        return "</br> Tốc độ : " . $this->speed . "</br> Màu : " . $this->color ."</br> Bán kính: " . $this->radius . ":fan is off";
-    }
-    }
-}
+
+
+} 
+    class Cylinder extends Circle{
+        private $height;
+
+        
+        public function setHeight($height){
+            $this->height = $height;
+        }
+        public function getHeight(){
+            return $this->height;
+        }
+        public function getVolume(){
+            $h = $this->getHeight();
+            return 3.14 * $h * ($this->getRadius()) ** 2;
+        }
+       
+
+
+
+        public function toString()
+        {
+            return  " Chiều cao :  " . $this->height ." </br> Bán kính : " . $this->radius . " </br> Thể tích : " . $this->getVolume()  ;
+
+        }
+
+
+
+ }
+    $circle = new  Circle();
+    $circle -> setRadius(30);
+    $circle -> setColor("blue");
+    echo "Circle  </br> " . $circle->toString();
+
+   $cylinder = new Cylinder();
+   $cylinder -> setHeight(101);
+   $cylinder -> setRadius(10);
+   echo " <br> Cylinder </br> " .   $cylinder->toString();
+   
     
-    $fan1= new Fan();
-    $fan2= new Fan();
-    $fan1 -> setFAST() -> setRadius(10) -> setColor("yellow") -> setOn(true);
-    $fan2 -> setMEDIUM() -> setRadius(5) -> setColor("blue") -> setOn(false);
-    echo "Quạt 1 : " . $fan1->toString() . " </br> Quạt 2 : " . $fan2->toString();
+    
+    
+    
+    
     
     
     ?>
-    
-    
-    
-    
-    
 </body>
 </html>
